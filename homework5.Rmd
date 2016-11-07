@@ -10,8 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ###Body Temperature Study
 
-I am interested in knowing whether my body temperature changes significantly after eating and after a full day of acitivities, therefore I measured and collected my body temperature at 3 time points of the day: in the morning (immediately after waking), after breakfast, and at the night (right before go to bed).
-I collected data for 23 days.
+I am interested in knowing whether my body temperature changes significantly after eating and after a full day of acitivities, therefore I measured and collected my body temperature at 3 time points of the day: in the morning (immediately after waking), after breakfast, and at the night (right before go to bed). The data will be compared using t test to see if there's a significant difference.
+
+###Data collection
+I took temperature using an electronic thermometer under armpit. There are several days that I forgot to take temperature at night, and the corresponding temperature entries were left as blank.
 
 ```{r, include=FALSE}
 temperaturedata<-read.csv(file='Temperature change during a day.csv')
@@ -25,6 +27,30 @@ temperaturedata$Night<-as.character(temperaturedata$Night)
 temperaturedata$Night<-as.numeric(temperaturedata$Night)
 ```
 
+###Examine basic statistics of three temperatures: mean, median, range, standard deviation
+
+```{r,echo=FALSE}
+summarystat<-matrix(nrow = 4, ncol = 3)
+summarystat[1,1]<-mean(temperaturedata$Morning)
+summarystat[1,2]<-mean(temperaturedata$Breakfast)
+summarystat[1,3]<-mean(temperaturedata$Night,na.rm = TRUE)
+summarystat[2,1]<-median(temperaturedata$Morning)
+summarystat[2,2]<-median(temperaturedata$Breakfast)
+summarystat[2,3]<-median(temperaturedata$Night,na.rm = TRUE)
+summarystat[3,1]<-max(temperaturedata$Morning)-min(temperaturedata$Morning)
+summarystat[3,2]<-max(temperaturedata$Breakfast)-min(temperaturedata$Breakfast)
+summarystat[3,3]<-max(temperaturedata$Night,na.rm = TRUE)-min(temperaturedata$Night, na.rm = TRUE)
+summarystat[4,1]<-sd(temperaturedata$Morning)
+summarystat[4,2]<-sd(temperaturedata$Breakfast)
+summarystat[4,3]<-sd(temperaturedata$Night,na.rm = TRUE)
+colnames(summarystat)<-c('Morning','After Breakfast','Night')
+rownames(summarystat)<-c('mean','median','range','standard deviation')
+library(knitr)
+kable(summarystat)
+```
+
+The means for all three groups are very close. No trend of change can be observed. The range of temperature at night is slightly greater than at morning and after breakfast, possibly due to different amount of activities being done during the day. The standard distribution indicates the temperature distribution is not spread out in each group.
+One thing worth mentioning is that the median for all groups is the same--35.8 degrees. I think this is my baseline temperature.
 
 ###Paired t test between morning temperature and after breakfast termperature
 Does body temperature change significantly after eating? A paired t test was done to calculate the significance of difference between 2 sets of temperature.
@@ -57,4 +83,3 @@ legend('topright',c('Morning','Night'),fill  = c(rgb(0,0,1,1/4),rgb(1,0,1,1/4)))
 ```
 
 Again the distributions seem to be random. 
-
