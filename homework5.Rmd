@@ -8,7 +8,10 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+###Body Temperature Study
 
+I am interested in knowing whether my body temperature changes significantly after eating and after a full day of acitivities, therefore I measured and collected my body temperature at 3 time points of the day: in the morning (immediately after waking), after breakfast, and at the night (right before go to bed).
+I collected data for 23 days.
 
 ```{r, include=FALSE}
 temperaturedata<-read.csv(file='Temperature change during a day.csv')
@@ -23,8 +26,8 @@ temperaturedata$Night<-as.numeric(temperaturedata$Night)
 ```
 
 
-###Does body temperature change significantly after eating?
 ###Paired t test between morning temperature and after breakfast termperature
+Does body temperature change significantly after eating? A paired t test was done to calculate the significance of difference between 2 sets of temperature.
 ```{r, echo=FALSE}
 t.test(temperaturedata$Morning,temperaturedata$Breakfast,paired = TRUE)
 ```
@@ -35,6 +38,7 @@ p value>0.05, so there is no significant change of temperature after eating.
 hist(temperaturedata$Morning,breaks = 10,col=rgb(0,0,1,1/4), xlab = 'Temperature')
 hist(temperaturedata$Breakfast,breaks = 10, col=rgb(1,0,1,1/4), xlab = 'Temperature', add = TRUE)
 legend(36.0,6,c('Morning','After Breakfast'))
+
 ```
 
 ###Does body temperature change significantly after a full day of activity?
@@ -42,3 +46,5 @@ legend(36.0,6,c('Morning','After Breakfast'))
 ```{r, echo=FALSE}
 t.test(temperaturedata$Morning,temperaturedata$Night,paired = TRUE)
 ```
+p value>0.05, so there is no significant change of temperature after a full day of activity.
+
