@@ -35,16 +35,26 @@ p value>0.05, so there is no significant change of temperature after eating.
 
 ###Generate plot to see the difference
 ```{r, echo=FALSE}
-hist(temperaturedata$Morning,breaks = 10,col=rgb(0,0,1,1/4), xlab = 'Temperature')
+hist(temperaturedata$Morning,breaks = 10, main='Temperature at Morning and After Breakfast', col=rgb(0,0,1,1/4), xlab = 'Temperature')
 hist(temperaturedata$Breakfast,breaks = 10, col=rgb(1,0,1,1/4), xlab = 'Temperature', add = TRUE)
-legend(36.0,6,c('Morning','After Breakfast'))
-
+legend('topright',c('Morning','After Breakfast'),fill  = c(rgb(0,0,1,1/4),rgb(1,0,1,1/4)))
 ```
 
-###Does body temperature change significantly after a full day of activity?
+Both distributions seem to be random between 35.2 and 36.2, which seems to be the range of my temperature. 
+
 ###Paired t test between morning temperature and night termperature
+Does body temperature change significantly after a full day of activity?
 ```{r, echo=FALSE}
 t.test(temperaturedata$Morning,temperaturedata$Night,paired = TRUE)
 ```
 p value>0.05, so there is no significant change of temperature after a full day of activity.
+
+###Generate plot to see the difference
+```{r, echo=FALSE}
+hist(temperaturedata$Morning,breaks = 10, main='Temperature at Morning and at Night', col=rgb(0,0,1,1/4), xlab = 'Temperature')
+hist(temperaturedata$Night,breaks = 20, col=rgb(1,0,1,1/4), xlab = 'Temperature', add = TRUE)
+legend('topright',c('Morning','Night'),fill  = c(rgb(0,0,1,1/4),rgb(1,0,1,1/4)))
+```
+
+Again the distributions seem to be random. 
 
