@@ -1,0 +1,24 @@
+---
+title: "Homework5"
+author: "Fifi"
+date: "November 7, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Import the google sheet.
+
+```{r}
+install.packages('gsheet')
+library(gsheet)
+temperaturedata<-gsheet2tbl('docs.google.com/spreadsheets/d/1GQ5Lfg0SlbH6m61Rfe2SBQ0y9V2RMHa0C0LogtgXJkM/edit#gid=0')
+```
+
+Organize the data
+```{r temperaturedata}
+temperaturedata<-temperaturedata[-1,2:4]
+colnames(temperaturedata)<-c('','','')
+```
