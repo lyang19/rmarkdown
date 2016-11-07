@@ -24,14 +24,21 @@ temperaturedata$Night<-as.numeric(temperaturedata$Night)
 
 
 ###Does body temperature change significantly after eating?
-###T test between morning temperature and after breakfast termperature
+###Paired t test between morning temperature and after breakfast termperature
 ```{r, echo=FALSE}
 t.test(temperaturedata$Morning,temperaturedata$Breakfast,paired = TRUE)
 ```
+p value>0.05, so there is no significant change of temperature after eating.
 
-###Generate plot
-```{r}
+###Generate plot to see the difference
+```{r, echo=FALSE}
 hist(temperaturedata$Morning,breaks = 10,col=rgb(0,0,1,1/4), xlab = 'Temperature')
 hist(temperaturedata$Breakfast,breaks = 10, col=rgb(1,0,1,1/4), xlab = 'Temperature', add = TRUE)
 legend(36.0,6,c('Morning','After Breakfast'))
+```
+
+###Does body temperature change significantly after a full day of activity?
+###Paired t test between morning temperature and night termperature
+```{r, echo=FALSE}
+t.test(temperaturedata$Morning,temperaturedata$Night,paired = TRUE)
 ```
