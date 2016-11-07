@@ -52,6 +52,12 @@ kable(summarystat)
 The means for all three groups are very close. No trend of change can be observed. The range of temperature at night is slightly greater than at morning and after breakfast, possibly due to different amount of activities being done during the day. The standard distribution indicates the temperature distribution is not spread out in each group.
 One thing worth mentioning is that the median for all groups is the same--35.8 degrees. I think this is my baseline temperature.
 
+###Boxplot
+A boxplot help to visualize the distribution of temperature in each group. 
+```{r, echo=FALSE}
+boxplot(temperaturedata$Morning,temperaturedata$Breakfast,temperaturedata$Night,names = c('Morning','After Breakfast','Night'),ylab='Temperature (in Celsius degrees)', main='Distribution of Temperature')
+```
+
 ###Paired t test between morning temperature and after breakfast termperature
 Does body temperature change significantly after eating? A paired t test was done to calculate the significance of difference between 2 sets of temperature.
 ```{r, echo=FALSE}
