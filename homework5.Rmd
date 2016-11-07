@@ -11,16 +11,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r, include=FALSE}
-temperaturedata<-read.csv(file.choose())
-```
-
-```{r temperaturedata, include=FALSE}
-temperaturedata<-temperaturedata[-1,2:4]
-colnames(temperaturedata)<-c('Morning','After Breakfast','Night')
+temperaturedata<-read.csv(file='Temperature change during a day.csv')
+temperaturedata<-temperaturedata[-1,-1]
+colnames(temperaturedata)<-c('Morning','Breakfast','Night')
+temperaturedata$Morning<-as.character(temperaturedata$Morning)
+temperaturedata$Morning<-as.numeric(temperaturedata$Morning)
+temperaturedata$Breakfast<-as.character(temperaturedata$Breakfast)
+temperaturedata$Breakfast<-as.numeric(temperaturedata$Breakfast)
+temperaturedata$Night<-as.character(temperaturedata$Night)
+temperaturedata$Night<-as.numeric(temperaturedata$Night)
 ```
 
 
 ###Does body temperature change significantly after eating?
-```{r temperaturedata, include=FALSE}
+###T test between morning temperature and after breakfast termperature
+```{r, echo=FALSE}
+t.test(temperaturedata$Morning,temperaturedata$Breakfast,paired = TRUE)
+```
 
+###Generate plot
+```{r}
+hist(temperaturedata$Morning,breaks = 10,col=rgb(0,0,1,1/4), xlab = 'Temperature')
+hist(temperaturedata$Breakfast,breaks = 10, col=rgb(1,0,1,1/4), xlab = 'Temperature', add = TRUE)
+legend(36.0,6,c('Morning','After Breakfast'))
 ```
